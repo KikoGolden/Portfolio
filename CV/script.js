@@ -34,6 +34,7 @@ let isBubbleSpawned = false;
 let lastKeyPressed = 'r';
 let nextClickCount = 0;
 
+let playerLeft = 15;
 let defaultProjectLeft = 50;
 let defaultDirectionSignLeft = 80;
 let defaultStopLeft = 2;
@@ -129,53 +130,58 @@ function walkRight(){
         isWalking = false;
       },800);
     }
+    
+    checkWidth('right');
 
-    if (controlsPopped) {
-      defaultControlsLeft -= 0.5;
-      controls.style.left = defaultControlsLeft + 'vw';
-    }
+}
 
-    if (controls.style.left == '-13vw' && !isBookSpawned) {
-      isBookSpawned = true;
-      book.classList.add('popUp');
-    }
-    if (isBookSpawned) {
-      defaultBookLeft -= 0.5;
-      book.style.left = defaultBookLeft + 'vw';
-    }
+//right movements
+function rightMovements(){
+  if (controlsPopped) {
+    defaultControlsLeft -= 0.5;
+    controls.style.left = defaultControlsLeft + 'vw';
+  }
 
-    if (book.style.left == '15vw' && !isBubbleSpawned) {
-      isBubbleSpawned = true;
-      dreamBubble.classList.add('popUp');
-    }
+  if (controls.style.left == '-13vw' && !isBookSpawned) {
+    isBookSpawned = true;
+    book.classList.add('popUp');
+  }
+  if (isBookSpawned) {
+    defaultBookLeft -= 0.5;
+    book.style.left = defaultBookLeft + 'vw';
+  }
 
-    if (book.style.left <= '15vw' && dreamBubbleClosed) {
-      projects.classList.add('fadeIn');
-      projectSpawned = true;
-    }
+  if (book.style.left == '15vw' && !isBubbleSpawned) {
+    isBubbleSpawned = true;
+    dreamBubble.classList.add('popUp');
+  }
 
-    if (projectSpawned) {
-      defaultProjectLeft -= 0.5;
-      projects.style.left = defaultProjectLeft + 'vw';
-      
-    }
-          
-    defaultDirectionSignLeft -= 0.5;
-    directionSign.style.left = defaultDirectionSignLeft + 'vw';
+  if (book.style.left <= '15vw' && dreamBubbleClosed) {
+    projects.classList.add('fadeIn');
+    projectSpawned = true;
+  }
 
-      defaultStopLeft -= 0.5;
-      stopSign.style.left = defaultStopLeft + 'vw';
-      
-      defaultWidth += 0.5;
-      defaultMargin -= 0.5;
-        grass.style.width = defaultWidth + 'vw';
-        grass.style.marginLeft = defaultMargin + 'vw';
+  if (projectSpawned) {
+    defaultProjectLeft -= 0.5;
+    projects.style.left = defaultProjectLeft + 'vw';
+  }
+        
+  defaultDirectionSignLeft -= 0.5;
+  directionSign.style.left = defaultDirectionSignLeft + 'vw';
+
+    defaultStopLeft -= 0.5;
+    stopSign.style.left = defaultStopLeft + 'vw';
+    
+    defaultWidth += 0.5;
+    defaultMargin -= 0.5;
+      grass.style.width = defaultWidth + 'vw';
+      grass.style.marginLeft = defaultMargin + 'vw';
 }
 
 //walk left
 function walkLeft(){
   lastKeyPressed = 'l'
-
+  
   if (!isWalking && !jumped) {
     isWalking = true;
     player.style.backgroundImage = "url('./images/playerLeft.png')";
@@ -185,6 +191,12 @@ function walkLeft(){
     },800);
   }
 
+  checkWidth('left');
+
+}
+
+//left movements
+function leftMovements(){
   if (defaultWidth != 100) {
     if (controlsPopped) {
       defaultControlsLeft += 0.5;
@@ -246,3 +258,124 @@ contactBtn.addEventListener('click',()=>{
        root.style.display = 'none';
   },2500)
 })
+
+//screen width check
+function checkWidth(direction){
+  if (direction == 'right') {
+    if (window.innerWidth > 2100) {
+      
+      if (defaultProjectLeft <= -77) {
+        if (playerLeft != 80) {
+          playerLeft += 0.5;
+           player.style.left = playerLeft + 'vw';
+        }
+      }else{rightMovements()}
+      
+    }else if (window.innerWidth > 2000 && window.innerWidth <= 2100) {
+      
+      if (defaultProjectLeft <= -100) {
+        if (playerLeft != 80) {
+          playerLeft += 0.5;
+           player.style.left = playerLeft + 'vw';
+        }
+      }else{rightMovements()}
+  
+    }else if (window.innerWidth > 1625 && window.innerWidth <= 2000) {
+      
+    if (defaultProjectLeft <= -137) {
+      if (playerLeft != 80) {
+        playerLeft += 0.5;
+         player.style.left = playerLeft + 'vw';
+      }
+    }else{rightMovements()}
+
+  }else if (window.innerWidth > 1360 && window.innerWidth <= 1625) {
+      
+    if (defaultProjectLeft <= -170) {
+      if (playerLeft != 80) {
+        playerLeft += 0.5;
+         player.style.left = playerLeft + 'vw';
+      }
+    }else{rightMovements()}
+
+  }else if (window.innerWidth >= 1220 && window.innerWidth <= 1360 ) {
+      
+    if (defaultProjectLeft <= -200) {
+      if (playerLeft != 80) {
+        playerLeft += 0.5;
+         player.style.left = playerLeft + 'vw';
+      }
+    }else{rightMovements()}
+
+  }else if (window.innerWidth >= 1110 && window.innerWidth <= 1220 ) {
+      
+    if (defaultProjectLeft <= -230) {
+      if (playerLeft != 80) {
+        playerLeft += 0.5;
+         player.style.left = playerLeft + 'vw';
+      }
+    }else{rightMovements()}
+
+  }else if (window.innerWidth <= 1110 ) {
+      
+    if (defaultProjectLeft <= -280) {
+      if (playerLeft != 80) {
+        playerLeft += 0.5;
+         player.style.left = playerLeft + 'vw';
+      }
+    }else{rightMovements()}
+
+  }
+  }else if (direction == 'left') {
+    if (window.innerWidth > 2100) {
+      
+      if (defaultProjectLeft <= -77 && playerLeft != 15) {
+        playerLeft -= 0.5;
+        player.style.left = playerLeft + 'vw';
+      }else{leftMovements()}
+      
+    }else if (window.innerWidth > 2000 && window.innerWidth <= 2100) {
+      
+      if (defaultProjectLeft <= -100 && playerLeft != 15) {
+          playerLeft -= 0.5;
+           player.style.left = playerLeft + 'vw';
+      }else{leftMovements()}
+  
+    }else if (window.innerWidth > 1625 && window.innerWidth <= 2000) {
+      
+    if (defaultProjectLeft <= -137 && playerLeft != 15) {
+      playerLeft -= 0.5;
+      player.style.left = playerLeft + 'vw';
+    }else{leftMovements()}
+
+  }else if (window.innerWidth > 1360 && window.innerWidth <= 1625) {
+      
+    if (defaultProjectLeft <= -170 && playerLeft != 15) {
+      playerLeft -= 0.5;
+      player.style.left = playerLeft + 'vw';
+    }else{leftMovements()}
+
+  }else if (window.innerWidth >= 1220 && window.innerWidth <= 1360 ) {
+      
+    if (defaultProjectLeft <= -200 && playerLeft != 15) {
+      playerLeft -= 0.5;
+      player.style.left = playerLeft + 'vw';
+    }else{leftMovements()}
+
+  }else if (window.innerWidth >= 1110 && window.innerWidth <= 1220 ) {
+      
+    if (defaultProjectLeft <= -230 && playerLeft != 15) {
+      playerLeft -= 0.5;
+      player.style.left = playerLeft + 'vw';
+    }else{leftMovements()}
+
+  }else if (window.innerWidth <= 1110 ) {
+      
+    if (defaultProjectLeft <= -280 && playerLeft != 15) {
+      playerLeft -= 0.5;
+      player.style.left = playerLeft + 'vw';
+    }else{leftMovements()}
+
+  }
+  }
+}
