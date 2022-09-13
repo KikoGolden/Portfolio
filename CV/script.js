@@ -9,6 +9,7 @@ let grass = document.getElementById('grass-field');
 let player = document.getElementById('player');
 let controls = document.getElementById('controls');
 let book = document.getElementById('book');
+let myInfo = document.getElementById('my-info-tab');
 let stopSign = document.getElementById('stopSign');
 let directionSign = document.getElementById('directionSign');
 let dreamBubble = document.getElementById('dream-bubble');
@@ -39,7 +40,8 @@ let defaultProjectLeft = 50;
 let defaultDirectionSignLeft = 80;
 let defaultStopLeft = 2;
 let defaultControlsLeft = 50;
-let defaultBookLeft = 50;
+let defaultBookLeft = 70;
+let defaultInfoLeft = 40;
 let defaultWidth = 100;
 let defaultMargin = 0;
 
@@ -145,13 +147,16 @@ function rightMovements(){
   if (controls.style.left == '-13vw' && !isBookSpawned) {
     isBookSpawned = true;
     book.classList.add('popUp');
+    myInfo.classList.add('popUp');
   }
   if (isBookSpawned) {
     defaultBookLeft -= 0.5;
+    defaultInfoLeft -= 0.5;
     book.style.left = defaultBookLeft + 'vw';
+    myInfo.style.left = defaultInfoLeft + 'vw';
   }
 
-  if (book.style.left == '15vw' && !isBubbleSpawned) {
+  if (book.style.left == '5vw' && !isBubbleSpawned) {
     isBubbleSpawned = true;
     dreamBubble.classList.add('popUp');
   }
@@ -204,6 +209,8 @@ function leftMovements(){
     }
     if (isBookSpawned) {
       defaultBookLeft += 0.5;
+      defaultInfoLeft += 0.5;
+      myInfo.style.left = defaultInfoLeft + 'vw';
       book.style.left = defaultBookLeft + 'vw';
     }
 
